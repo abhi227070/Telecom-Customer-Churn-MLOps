@@ -193,3 +193,5 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 secrets.txt
+notebook/mongoDB_demo.ipynb
+demo.py
