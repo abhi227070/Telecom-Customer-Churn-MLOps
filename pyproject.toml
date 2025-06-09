@@ -1,0 +1,11 @@
+[project]
+name = "src"
+version = "0.0.1"
+description = "An MLOps project for predicting the Customer Churn in Telecom Industry also implementing complete MLOPs with CI/CD pipeline using GitHub Actions"
+authors = [{name = "Abhijit Maharana", email = "abhijeetmaharana77@gmail.com"}]
+
+[tool.setuptools]
+packages = {find = {}}
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
