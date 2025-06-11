@@ -195,3 +195,4 @@ cython_debug/
 secrets.txt
 notebook/mongoDB_demo.ipynb
 demo.py
+artifact/

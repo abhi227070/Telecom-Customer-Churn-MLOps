@@ -1,4 +1,5 @@
 ipykernel
+dotenv
 pandas
 numpy
 matplotlib
