@@ -138,6 +138,7 @@ class DataTransformation:
             logging.info("feature-target concatenation done for train-test df.")
 
             save_object(self.data_transformation_config.transformed_object_file_path, preprocessor)
+            save_object(self.data_transformation_config.transformed_encoder_file_path, encoder)
             save_numpy_array_data(self.data_transformation_config.transformed_train_file_path, array=train_arr)
             save_numpy_array_data(self.data_transformation_config.transformed_test_file_path, array=test_arr)
             logging.info("Saving transformation object and transformed files.")
@@ -146,7 +147,8 @@ class DataTransformation:
             return DataTransformationArtifact(
                 transformed_object_file_path=self.data_transformation_config.transformed_object_file_path,
                 transformed_train_file_path=self.data_transformation_config.transformed_train_file_path,
-                transformed_test_file_path=self.data_transformation_config.transformed_test_file_path
+                transformed_test_file_path=self.data_transformation_config.transformed_test_file_path,
+                transformed_encoder_file_path=self.data_transformation_config.transformed_encoder_file_path
             )
 
         except Exception as e:

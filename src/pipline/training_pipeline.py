@@ -87,14 +87,16 @@ class TrainPipeline:
         except Exception as e:
             raise CustomException(e, sys)
     def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
-                               model_trainer_artifact: ModelTrainerArtifact) -> ModelEvaluationArtifact:
+                               model_trainer_artifact: ModelTrainerArtifact,
+                               data_transformation_artifact: DataTransformationArtifact) -> ModelEvaluationArtifact:
         """
         This method of TrainPipeline class is responsible for starting modle evaluation
         """
         try:
             model_evaluation = ModelEvaluation(model_eval_config=self.model_evaluation_config,
                                                data_ingestion_artifact=data_ingestion_artifact,
-                                               model_trainer_artifact=model_trainer_artifact)
+                                               model_trainer_artifact=model_trainer_artifact,
+                                               data_transformation_artifact=data_transformation_artifact)
             model_evaluation_artifact = model_evaluation.initiate_model_evaluation()
             return model_evaluation_artifact
         except Exception as e:
@@ -124,7 +126,8 @@ class TrainPipeline:
                 data_ingestion_artifact=data_ingestion_artifact, data_validation_artifact=data_validation_artifact)
             model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
             model_evaluation_artifact = self.start_model_evaluation(data_ingestion_artifact=data_ingestion_artifact,
-                                                                    model_trainer_artifact=model_trainer_artifact)
+                                                                    model_trainer_artifact=model_trainer_artifact,
+                                                                    data_transformation_artifact=data_transformation_artifact)
             if not model_evaluation_artifact.is_model_accepted:
                 logging.info(f"Model not accepted.")
                 return None

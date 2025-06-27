@@ -1,5 +1,5 @@
 from src.entity.config_entity import ModelEvaluationConfig
-from src.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact, ModelEvaluationArtifact
+from src.entity.artifact_entity import ModelTrainerArtifact, DataIngestionArtifact, ModelEvaluationArtifact, DataTransformationArtifact
 from sklearn.metrics import accuracy_score
 from src.exception import CustomException as MyException
 from src.constants import TARGET_COLUMN
@@ -22,10 +22,11 @@ class EvaluateModelResponse:
 class ModelEvaluation:
 
     def __init__(self, model_eval_config: ModelEvaluationConfig, data_ingestion_artifact: DataIngestionArtifact,
-                 model_trainer_artifact: ModelTrainerArtifact):
+                 data_transformation_artifact: DataTransformationArtifact,model_trainer_artifact: ModelTrainerArtifact):
         try:
             self.model_eval_config = model_eval_config
             self.data_ingestion_artifact = data_ingestion_artifact
+            self.data_transformation_artifact = data_transformation_artifact
             self.model_trainer_artifact = model_trainer_artifact
         except Exception as e:
             raise MyException(e, sys) from e
@@ -83,13 +84,21 @@ class ModelEvaluation:
             x, y = test_df.drop(TARGET_COLUMN, axis=1), test_df[TARGET_COLUMN]
 
             logging.info("Test data loaded and now transforming it for prediction...")
+            
+            encoder = load_object(file_path=self.data_transformation_artifact.transformed_encoder_file_path)
 
             x = self._change_dtype(x)
             x = self._drop_column(x)
 
             trained_model = load_object(file_path=self.model_trainer_artifact.trained_model_file_path)
+            
+            
+            y = encoder.transform(y)
+            
             logging.info("Trained model loaded/exists.")
             trained_model_accuracy = self.model_trainer_artifact.metric_artifact.accuracy_score
+            trained_model_output = trained_model.predict(x)
+            trained_model_accuracy = accuracy_score(y, trained_model_output)
             logging.info(f"Accuracy_Score for this model: {trained_model_accuracy}")
 
             best_model_accuracy_score=None
@@ -98,7 +107,7 @@ class ModelEvaluation:
                 logging.info(f"Computing F1_Score for production model..")
                 y_hat_best_model = best_model.predict(x)
                 best_model_accuracy_score = accuracy_score(y, y_hat_best_model)
-                logging.info(f"F1_Score-Production Model: {best_model_accuracy_score}, F1_Score-New Trained Model: {trained_model_accuracy}")
+                logging.info(f"Accuracy-Production Model: {best_model_accuracy_score}, Accuracy-New Trained Model: {trained_model_accuracy}")
             
             tmp_best_model_score = 0 if best_model_accuracy_score is None else best_model_accuracy_score
             result = EvaluateModelResponse(trained_model_f1_score=trained_model_accuracy,
