@@ -1,7 +1,6 @@
 import sys
 import numpy as np
 import pandas as pd
-from imblearn.combine import SMOTEENN
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer

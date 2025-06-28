@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Customer Churn Prediction</title>
+    <!-- Corrected the CSS path -->
+    <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}?v={{ time }}">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Telecom Customer Churn Prediction</h1>
+
+        <form method="post" action="/" name="myFomr" id="myForm">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="Gender" required>
+            <option value="1">Male</option>
+            <option value="0">Female</option>
+            </select>
+
+            <label for="SeniorCitizen">Senior Citizen (1: Yes, 0: No):</label>
+            <select id="SeniorCitizen" name="SeniorCitizen" required>
+            <option value="1">1</option>
+            <option value="0">0</option>
+            </select>
+
+            <label for="Partner">Partner:</label>
+            <select id="Partner" name="Partner" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+
+            <label for="Dependents">Dependents:</label>
+            <select id="Dependents" name="Dependents" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+
+            <label for="tenure">Tenure (in months):</label>
+            <input type="number" id="tenure" name="tenure" min="0" required>
+
+            <label for="PhoneService">Phone Service:</label>
+            <select id="PhoneService" name="PhoneService" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+
+            <label for="MultipleLines">Multiple Lines:</label>
+            <select id="MultipleLines" name="MultipleLines" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No phone service">No phone service</option>
+            </select>
+
+            <label for="InternetService">Internet Service (1: DSL, 2: Fiber Optic, 0: No):</label>
+            <select id="InternetService" name="InternetService" required>
+            <option value="DSL">DSL</option>
+            <option value="Fiber Optic">Fiber Optic</option>
+            <option value="No">No</option>
+            </select>
+
+            <label for="OnlineSecurity">Online Security (1: Yes, 0: No):</label>
+            <select id="OnlineSecurity" name="OnlineSecurity" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="OnlineBackup">Online Backup (1: Yes, 0: No):</label>
+            <select id="OnlineBackup" name="OnlineBackup" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="DeviceProtection">Device Protection (1: Yes, 0: No):</label>
+            <select id="DeviceProtection" name="DeviceProtection" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="TechSupport">Tech Support (1: Yes, 0: No):</label>
+            <select id="TechSupport" name="TechSupport" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="StreamingTV">Streaming TV (1: Yes, 0: No):</label>
+            <select id="StreamingTV" name="StreamingTV" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="StreamingMovies">Streaming Movies (1: Yes, 0: No):</label>
+           <select id="StreamingMovies" name="StreamingMovies" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No internet service">No internet service</option>
+            </select>
+
+            <label for="Contract">Contract (1: Month-to-Month, 2: One Year, 3: Two Year):</label>
+            <select id="Contract" name="Contract" required>
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+            </select>
+
+            <label for="PaperlessBilling">Paperless Billing (1: Yes, 0: No):</label>
+            <select id="PaperlessBilling" name="PaperlessBilling" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select>
+
+            <label for="PaymentMethod">Payment Method (1: Electronic Check, 2: Mailed Check, 3: Bank Transfer, 4: Credit Card):</label>
+            <select id="PaymentMethod" name="PaymentMethod" required>
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+            <option value="Credit card (automatic)">Credit card (automatic)</option>
+            </select>
+
+            <label for="MonthlyCharges">Monthly Charges:</label>
+            <input type="number" id="MonthlyCharges" name="MonthlyCharges" required>
+
+            <label for="TotalCharges">Total Charges:</label>
+            <input type="number" id="TotalCharges" name="TotalCharges" required>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        <form method="get" action="/train">
+            <button type="submit" class="train-button">Train Model</button>
+        </form>
+
+        {% if context %}
+            <div class="result">
+                <h2>Result: {{ context }}</h2>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
