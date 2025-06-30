@@ -129,7 +129,7 @@ pip install -e .
 4. **Model Training** using classification models
 5. **Model Evaluation** with threshold-based checks
 6. **Model Pushing** to AWS S3
-7. **Prediction Pipeline** via Flask API
+7. **Prediction Pipeline** via Fast API
 
 ---
 
@@ -137,7 +137,7 @@ pip install -e .
 
 * **MongoDB Atlas**: Stores raw customer data.
 * **AWS S3**: Stores trained model artifacts.
-* **AWS EC2**: Hosts the web application (Flask + Gunicorn).
+* **AWS EC2**: Hosts the web application (FastAPI + Uvicorn).
 * **GitHub Actions**: Automates the build, test, and deploy pipeline.
 * **Docker**: Containerizes the app for consistent deployment.
 
@@ -192,6 +192,6 @@ This project is licensed under the MIT License.
 
 ---
 
-> Built with ❤️ using Python, Flask, MongoDB, Docker, GitHub Actions, and AWS.
+> Built with ❤️ using Python, FastAPI, MongoDB, Docker, GitHub Actions, and AWS.
 
 ---
