@@ -1,5 +1,3 @@
-Thank you! Based on the detailed project flow you provided, here’s a professional `README.md` for your **Telecom Customer Churn Prediction** project. This README includes a **Table of Contents**, highlights the architecture and features like CI/CD, logging, and AWS integration, and is suitable for showcasing on GitHub or in a portfolio.
-
 ---
 
 # 📞 Telecom Customer Churn Prediction
@@ -196,9 +194,4 @@ This project is licensed under the MIT License.
 
 > Built with ❤️ using Python, Flask, MongoDB, Docker, GitHub Actions, and AWS.
 
-```
-
 ---
-
-Would you like me to export this as a downloadable `README.md` file? Or customize it further (e.g., add badges, project screenshots, or usage examples)?
-```
