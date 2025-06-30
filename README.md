@@ -2,7 +2,6 @@ Thank you! Based on the detailed project flow you provided, here’s a professio
 
 ---
 
-```markdown
 # 📞 Telecom Customer Churn Prediction
 
 A complete, end-to-end machine learning project to predict customer churn in a telecom company. This project is production-ready with a modular structure, CI/CD using GitHub Actions, Docker deployment to AWS EC2, and data management with MongoDB and AWS S3.
